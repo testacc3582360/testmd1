@@ -55,12 +55,7 @@ predict DILI for different therapeutic drugs<sup>15</sup>.
 <img src="./media/image1.jpeg"
 style="width:5.81667in;height:3.03333in" />
 
-<iframe
-    src="https://www.chatbase.co/chatbot-iframe/B_hO8D0RvgvIdzBEOzdqF"
-    width="100%"
-    style="height: 100%; min-height: 700px"
-    frameborder="0"
-></iframe>
+
 
 **Fig 1:** Schematic showing the different Non-Animal Models
 
