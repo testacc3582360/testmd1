@@ -1,3 +1,4 @@
+<div align="left">
 **4.1 Background (Global and Indian - market size and number of
 approvals)**
 
@@ -2573,7 +2574,7 @@ and pharmacodynamics (PK/PD) in partnership with the DCGI</p></td>
 
 **References:**
 
-<div align="left">
+
 1 Prior, H. *et al.* Justification for species selection for
 pharmaceutical toxicity studies. *Toxicol Res (Camb)* **9**, 758-770
 (2020). <https://doi.org/10.1093/toxres/tfaa081>
