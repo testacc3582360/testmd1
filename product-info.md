@@ -1,5 +1,3 @@
-**Chapter 4: Non-animal Methodologies (NAMs) for drug testing**
-
 **4.1 Background (Global and Indian - market size and number of
 approvals)**
 
