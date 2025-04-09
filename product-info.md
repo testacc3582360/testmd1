@@ -2573,6 +2573,7 @@ and pharmacodynamics (PK/PD) in partnership with the DCGI</p></td>
 
 **References:**
 
+<div align="left">
 1 Prior, H. *et al.* Justification for species selection for
 pharmaceutical toxicity studies. *Toxicol Res (Camb)* **9**, 758-770
 (2020). <https://doi.org/10.1093/toxres/tfaa081>
@@ -2905,3 +2906,4 @@ pharmaceutical products.
 78 Valerio, L. G., Jr. In silico toxicology models and databases as FDA
 Critical Path Initiative toolkits. *Hum Genomics* **5**, 200-207 (2011).
 <https://doi.org/10.1186/1479-7364-5-3-200>
+</div>
