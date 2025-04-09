@@ -37,6 +37,17 @@ nav a:hover {
   color: var(--link);
 }
 
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+table, th, td {
+  border: 1px solid #aaa;
+  padding: 8px;
+}
+
+
 .toggle-btn {
   margin-right: auto;
   cursor: pointer;
