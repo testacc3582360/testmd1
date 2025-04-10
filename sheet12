@@ -1,0 +1,107 @@
+<table>
+    <tr>
+        <td>Rare disease</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>Cystic fibrosis</td>
+        <td>Currently three trials underway that are using kidney organoids for cystic fibrosis in Clinical Trials. gov</td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td>Clinical Trial No.</td>
+        <td>Trial Desciption</td>
+        <td>How organoids are being used/Comments</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td>NCT06468527</td>
+        <td>Clinical Trial to Evaluate the Efficacy and Safety of Dirocaftor/Posenacaftor/Nesolicaftor in Adults With CF</td>
+        <td> CFTR modulators and their combinations were tested on organoids from over 500 European and Israeli CF patients with rare CFTR mutations to identify patients who are predicted to clinically benefit from these treatments. </td>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td>NCT03390985</td>
+        <td>Canadian Observation Trial in CF Patients Undergoing Treatment With Ivacaftor</td>
+        <td>To establish correlation between the CFTR response to Vx-770 measured in a new ex vivo method (organoids) and the actual clinical and/or functional response in individual patients,</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td>NCT05100823</td>
+        <td>Validation of Therapeutic Efficacy Targeting the Splicing Variants in Cystic Fibrosis and CFTR Pathologies</td>
+        <td>assessment of ONB (named ONB-CFTR) various CFTR genotypes will be performed using an air-liquid interface model of airway epithelium</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>Breast Cancer</td>
+        <td>Currently 36 trials underway that are using patient-derived organoids to verify the effectiveness, feasibility and consistency of the PDO model in predicting treatment, </td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td>and establish an evaluation system for treatment plans to help precision treatment of advanced breast cance</td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td>Clincial Trial No.</td>
+        <td>Trial Desciption</td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td>NCT06702800</td>
+        <td>Clinical Exploratory Study on Predicting Drug Sensitivity for Breast Cancer Treatment Using Simulated Organoid Models</td>
+        <td>Assess drug sensitvity in PDO and compare with clinical characteristics</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td>NCT06102824</td>
+        <td>Organoid-based Functional Precision Therapy for Advanced Breast Cancer</td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td>NCT06438055</td>
+        <td>Clinical Treatment of Refractory Breast Cancer Based on Organoid Drug Sensitivity Results</td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td>NCT06468124</td>
+        <td>Sensitivity of Organoids to Predict Treatment Outcome in Breast Cancer Metastases</td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td>NCT06268652</td>
+        <td>Patient Derived Organoid-guided Personalized Treatment Versus Treatment of Physician&#39;s Choice in Breast Cancer</td>
+        <td></td>
+        <td></td>
+    </tr>
+</table>
