@@ -1,65 +1,93 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Excel</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <title>Excel Workbook with Markdown Tabs</title>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <style>
+    body {
+      font-family: sans-serif;
+    }
+    .tabs {
+      display: flex;
+      flex-wrap: wrap;
+      border-bottom: 2px solid #ccc;
+      margin-bottom: 10px;
+    }
+    .tab-button {
+      padding: 10px 20px;
+      cursor: pointer;
+      background-color: #f0f0f0;
+      border: 1px solid #ccc;
+      border-bottom: none;
+      margin-right: 2px;
+    }
+    .tab-button.active {
+      background-color: white;
+      border-top: 2px solid #0078D4;
+      font-weight: bold;
+    }
+    .sheet {
+      display: none;
+      border: 1px solid #ccc;
+      padding: 20px;
+    }
+    .sheet.active {
+      display: block;
+    }
+  </style>
 </head>
 <body>
-  <header>
-    <button class="toggle-btn" onclick="toggleDarkMode()">Toggle Dark Mode</button>
-    <div><strong>NAMs</strong></div>
-    <nav>
-	<a href="index.html">Home</a>
-      <a href="about.html">About Us</a>
-       <a href="chapter4.html">Draft report</a>
-      <a href="chapter4.html">Excel sheet</a>
-      <a href="contact.html">Contact Us</a>
-    </nav>
-  </header>
 
-  <div class="section fade-in-scroll">
-    <h2>Excel</h2>
-    <p>Non-animal Methodologies (NAMs) for drug testing</p>
-  </div>
+  <div class="tabs" id="tabBar"></div>
+  <div id="sheets"></div>
 
-<!-- Markdown container -->
-<div id="markdown-content" class="section"></div>
+  <script>
+    const totalSheets = 14;
+    const tabBar = document.getElementById('tabBar');
+    const sheetsContainer = document.getElementById('sheets');
 
-<!-- Load Marked.js -->
-<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    for (let i = 1; i <= totalSheets; i++) {
+      // Create tab
+      const tab = document.createElement('button');
+      tab.className = 'tab-button';
+      tab.textContent = `Sheet ${i}`;
+      tab.dataset.sheet = `sheet${i}`;
+      tab.addEventListener('click', () => switchTab(i));
+      tabBar.appendChild(tab);
 
-<script>
-  fetch('product-info2.md') // adjust path if in subfolder
-    .then(res => res.text())
-    .then(md => {
-      document.getElementById('markdown-content').innerHTML = marked.parse(md);
-    });
-</script>
-	
- <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-            observer.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.1 });
-
-      document.querySelectorAll('.fade-in-scroll').forEach(el => observer.observe(el));
-
-      if (localStorage.getItem("theme") === "dark") {
-        document.body.classList.add("dark");
-      }
-    });
-
-    function toggleDarkMode() {
-      document.body.classList.toggle("dark");
-      localStorage.setItem("theme", document.body.classList.contains("dark") ? "dark" : "light");
+      // Create sheet container
+      const sheet = document.createElement('div');
+      sheet.className = 'sheet';
+      sheet.id = `sheet${i}`;
+      sheetsContainer.appendChild(sheet);
     }
+
+    function switchTab(sheetNum) {
+      document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
+      document.querySelectorAll('.sheet').forEach(sheet => sheet.classList.remove('active'));
+
+      document.querySelector(`.tab-button:nth-child(${sheetNum})`).classList.add('active');
+      const sheetDiv = document.getElementById(`sheet${sheetNum}`);
+      sheetDiv.classList.add('active');
+
+      // Load and render markdown content
+      fetch(`sheet${sheetNum}.md`)
+        .then(response => {
+          if (!response.ok) throw new Error("File not found");
+          return response.text();
+        })
+        .then(md => {
+          sheetDiv.innerHTML = marked.parse(md);
+        })
+        .catch(err => {
+          sheetDiv.innerHTML = `<p style="color:red;">Error loading sheet${sheetNum}.md</p>`;
+        });
+    }
+
+    // Initialize first tab
+    switchTab(1);
   </script>
+
 </body>
 </html>
