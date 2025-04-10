@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Chapter 4</title>
+  <title>Draft report</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -13,14 +13,15 @@
     <nav>
 	<a href="index.html">Home</a>
       <a href="about.html">About Us</a>
-      <a href="chapter4.html">Chapter 4</a>
+      <a href="draftreport.html">Draft report</a>
+	<a href="excel.html">Excel sheet</a>
       <a href="contact.html">Contact Us</a>
     </nav>
   </header>
 
   <div class="section fade-in-scroll">
-    <h2>Chapter 4</h2>
-    <p>Non-animal Methodologies (NAMs) for drug testing</p>
+    <h2>Landscape Analysis on Alternatives to Animal Testing for Drug Development in India</h2>
+    <p>Draft report</p>
   </div>
 
 <!-- Markdown container -->
@@ -30,7 +31,7 @@
 <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 
 <script>
-  fetch('product-info.md') // adjust path if in subfolder
+  fetch('draftrep.md') // adjust path if in subfolder
     .then(res => res.text())
     .then(md => {
       document.getElementById('markdown-content').innerHTML = marked.parse(md);
