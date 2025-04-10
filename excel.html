@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Excel Workbook with Markdown Tabs</title>
+  <title>Excel Workbook with Markdown Tabs and Search</title>
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
   <style>
     body {
@@ -35,6 +35,12 @@
     .sheet.active {
       display: block;
     }
+    .search-bar {
+      margin-bottom: 10px;
+    }
+    mark {
+      background-color: yellow;
+    }
   </style>
 </head>
 <body>
@@ -43,12 +49,12 @@
   <div id="sheets"></div>
 
   <script>
-    const totalSheets = 14;
+    const totalSheets = 15;
     const tabBar = document.getElementById('tabBar');
     const sheetsContainer = document.getElementById('sheets');
 
     for (let i = 1; i <= totalSheets; i++) {
-      // Create tab
+      // Create tab button
       const tab = document.createElement('button');
       tab.className = 'tab-button';
       tab.textContent = `Sheet ${i}`;
@@ -60,6 +66,21 @@
       const sheet = document.createElement('div');
       sheet.className = 'sheet';
       sheet.id = `sheet${i}`;
+
+      // Add search bar
+      const searchInput = document.createElement('input');
+      searchInput.type = 'text';
+      searchInput.placeholder = 'Search this sheet...';
+      searchInput.className = 'search-bar';
+      searchInput.dataset.sheet = `sheet${i}`;
+      searchInput.addEventListener('input', () => performSearch(i, searchInput.value));
+
+      const contentDiv = document.createElement('div');
+      contentDiv.className = 'content';
+      contentDiv.id = `content${i}`;
+
+      sheet.appendChild(searchInput);
+      sheet.appendChild(contentDiv);
       sheetsContainer.appendChild(sheet);
     }
 
@@ -71,18 +92,34 @@
       const sheetDiv = document.getElementById(`sheet${sheetNum}`);
       sheetDiv.classList.add('active');
 
-      // Load and render markdown content
       fetch(`sheet${sheetNum}.md`)
         .then(response => {
           if (!response.ok) throw new Error("File not found");
           return response.text();
         })
         .then(md => {
-          sheetDiv.innerHTML = marked.parse(md);
+          const contentHTML = marked.parse(md);
+          document.getElementById(`content${sheetNum}`).innerHTML = contentHTML;
         })
         .catch(err => {
-          sheetDiv.innerHTML = `<p style="color:red;">Error loading sheet${sheetNum}.md</p>`;
+          document.getElementById(`content${sheetNum}`).innerHTML = `<p style="color:red;">Error loading sheet${sheetNum}.md</p>`;
         });
+    }
+
+    function performSearch(sheetNum, searchText) {
+      const contentDiv = document.getElementById(`content${sheetNum}`);
+      const originalText = contentDiv.textContent;
+      const regex = new RegExp(`(${searchText})`, 'gi');
+
+      if (searchText.trim() === "") {
+        switchTab(sheetNum); // reload raw markdown
+        return;
+      }
+
+      let html = marked.parse(originalText);
+      // Escape and highlight matches
+      html = html.replace(regex, '<mark>$1</mark>');
+      contentDiv.innerHTML = html;
     }
 
     // Initialize first tab
