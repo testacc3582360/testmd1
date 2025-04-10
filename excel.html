@@ -1,130 +1,42 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Excel Workbook with Markdown Tabs and Search</title>
-  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-  <style>
-    body {
-      font-family: sans-serif;
-    }
-    .tabs {
-      display: flex;
-      flex-wrap: wrap;
-      border-bottom: 2px solid #ccc;
-      margin-bottom: 10px;
-    }
-    .tab-button {
-      padding: 10px 20px;
-      cursor: pointer;
-      background-color: #f0f0f0;
-      border: 1px solid #ccc;
-      border-bottom: none;
-      margin-right: 2px;
-    }
-    .tab-button.active {
-      background-color: white;
-      border-top: 2px solid #0078D4;
-      font-weight: bold;
-    }
-    .sheet {
-      display: none;
-      border: 1px solid #ccc;
-      padding: 20px;
-    }
-    .sheet.active {
-      display: block;
-    }
-    .search-bar {
-      margin-bottom: 10px;
-    }
-    mark {
-      background-color: yellow;
-    }
-  </style>
-</head>
-<body>
+<script>
+  const totalSheets = 15; // ← just change this number!
+  const tabBar = document.getElementById('tabBar');
+  const sheetsContainer = document.getElementById('sheets');
 
-  <div class="tabs" id="tabBar"></div>
-  <div id="sheets"></div>
+  for (let i = 1; i <= totalSheets; i++) {
+    const tab = document.createElement('button');
+    tab.className = 'tab-button';
+    tab.textContent = `Sheet ${i}`;
+    tab.dataset.sheet = `sheet${i}`;
+    tab.addEventListener('click', () => switchTab(i));
+    tabBar.appendChild(tab);
 
-  <script>
-    const totalSheets = 15;
-    const tabBar = document.getElementById('tabBar');
-    const sheetsContainer = document.getElementById('sheets');
+    const sheet = document.createElement('div');
+    sheet.className = 'sheet';
+    sheet.id = `sheet${i}`;
+    sheetsContainer.appendChild(sheet);
+  }
 
-    for (let i = 1; i <= totalSheets; i++) {
-      // Create tab button
-      const tab = document.createElement('button');
-      tab.className = 'tab-button';
-      tab.textContent = `Sheet ${i}`;
-      tab.dataset.sheet = `sheet${i}`;
-      tab.addEventListener('click', () => switchTab(i));
-      tabBar.appendChild(tab);
+  function switchTab(sheetNum) {
+    document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
+    document.querySelectorAll('.sheet').forEach(sheet => sheet.classList.remove('active'));
 
-      // Create sheet container
-      const sheet = document.createElement('div');
-      sheet.className = 'sheet';
-      sheet.id = `sheet${i}`;
+    document.querySelector(`.tab-button:nth-child(${sheetNum})`).classList.add('active');
+    const sheetDiv = document.getElementById(`sheet${sheetNum}`);
+    sheetDiv.classList.add('active');
 
-      // Add search bar
-      const searchInput = document.createElement('input');
-      searchInput.type = 'text';
-      searchInput.placeholder = 'Search this sheet...';
-      searchInput.className = 'search-bar';
-      searchInput.dataset.sheet = `sheet${i}`;
-      searchInput.addEventListener('input', () => performSearch(i, searchInput.value));
+    fetch(`sheet${sheetNum}.md`)
+      .then(response => {
+        if (!response.ok) throw new Error("File not found");
+        return response.text();
+      })
+      .then(md => {
+        sheetDiv.innerHTML = marked.parse(md);
+      })
+      .catch(err => {
+        sheetDiv.innerHTML = `<p style="color:red;">Error loading sheet${sheetNum}.md</p>`;
+      });
+  }
 
-      const contentDiv = document.createElement('div');
-      contentDiv.className = 'content';
-      contentDiv.id = `content${i}`;
-
-      sheet.appendChild(searchInput);
-      sheet.appendChild(contentDiv);
-      sheetsContainer.appendChild(sheet);
-    }
-
-    function switchTab(sheetNum) {
-      document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
-      document.querySelectorAll('.sheet').forEach(sheet => sheet.classList.remove('active'));
-
-      document.querySelector(`.tab-button:nth-child(${sheetNum})`).classList.add('active');
-      const sheetDiv = document.getElementById(`sheet${sheetNum}`);
-      sheetDiv.classList.add('active');
-
-      fetch(`sheet${sheetNum}.md`)
-        .then(response => {
-          if (!response.ok) throw new Error("File not found");
-          return response.text();
-        })
-        .then(md => {
-          const contentHTML = marked.parse(md);
-          document.getElementById(`content${sheetNum}`).innerHTML = contentHTML;
-        })
-        .catch(err => {
-          document.getElementById(`content${sheetNum}`).innerHTML = `<p style="color:red;">Error loading sheet${sheetNum}.md</p>`;
-        });
-    }
-
-    function performSearch(sheetNum, searchText) {
-      const contentDiv = document.getElementById(`content${sheetNum}`);
-      const originalText = contentDiv.textContent;
-      const regex = new RegExp(`(${searchText})`, 'gi');
-
-      if (searchText.trim() === "") {
-        switchTab(sheetNum); // reload raw markdown
-        return;
-      }
-
-      let html = marked.parse(originalText);
-      // Escape and highlight matches
-      html = html.replace(regex, '<mark>$1</mark>');
-      contentDiv.innerHTML = html;
-    }
-
-    // Initialize first tab
-    switchTab(1);
-  </script>
-
-</body>
-</html>
+  switchTab(1);
+</script>
